@@ -1,59 +1,113 @@
 import { z } from 'zod';
 import { router, publicProcedure } from '../index';
-import { mockCategories } from '../../../data/mockCategories';
+import { Category, UICategory } from '../../../types/api';
 
-console.log("categoriesRouter loaded");
+const CENTRALAPP_API_BASE = 'https://dev.centralapp.com/api/v2';
+
+function transformCategory(category: Category, language: string = 'en'): UICategory {
+  return {
+    id: category.id.toString(),
+    name: category.translations[language as keyof typeof category.translations] || category.name,
+    path: category.path,
+    description: category.translations[language as keyof typeof category.translations] || category.name,
+  };
+}
+
+async function fetchCategoriesFromAPI(
+  searchTerm: string, 
+  language: string = 'en', 
+  level: string = 'L1'
+): Promise<Category[]> {
+  try {
+    const url = `${CENTRALAPP_API_BASE}/static/categories/like?name=${encodeURIComponent(searchTerm)}&language=${language}&level=${level}`;
+    console.log('Fetching from CentralApp API:', url);
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    }
+    
+    const data = await response.json();
+    console.log('API Response:', data);
+    
+    return Array.isArray(data) ? data : data.categories || [];
+  } catch (error) {
+    console.error('Error fetching categories from CentralApp API:', error);
+    throw error;
+  }
+}
 
 export const categoriesRouter = router({
   search: publicProcedure
     .input(
       z.object({
         query: z.string(),
-        page: z.number().min(1),
-        limit: z.number().min(1).max(50),
+        page: z.number().min(1).default(1),
+        limit: z.number().min(1).max(50).default(10),
+        language: z.string().default('en'),
+        level: z.string().default('L1'),
       })
     )
     .query(async ({ input }) => {
       console.log("search procedure called", input);
-      const { query, page, limit } = input;
-      console.log(query, page, limit);
-      
-      await new Promise(resolve => setTimeout(resolve, 500));
+      const { query, page, limit, language, level } = input;
+      if (query.length < 2) {
+        return {
+          categories: [],
+          total: 0,
+          page,
+          limit,
+        };
+      }
 
-      const filteredCategories = mockCategories.filter(category => 
-        category.name.toLowerCase().includes(query.toLowerCase()) ||
-        category.path.toLowerCase().includes(query.toLowerCase())
-      );
+      try {
+        const apiCategories = await fetchCategoriesFromAPI(query, language, level);
+        const transformedCategories = apiCategories.map(cat => transformCategory(cat, language));
+        const start = (page - 1) * limit;
+        const end = start + limit;
+        const paginatedCategories = transformedCategories.slice(start, end);
 
-      const start = (page - 1) * limit;
-      const end = start + limit;
-      const paginatedCategories = filteredCategories.slice(start, end);
-
-      return {
-        categories: paginatedCategories,
-        total: filteredCategories.length,
-        page,
-        limit,
-      };
+        return {
+          categories: paginatedCategories,
+          total: transformedCategories.length,
+          page,
+          limit,
+        };
+      } catch (error) {
+        console.error('Error in search procedure:', error);
+        return {
+          categories: [],
+          total: 0,
+          page,
+          limit,
+        };
+      }
     }),
 
   getSelected: publicProcedure
     .input(
       z.object({
         ids: z.array(z.string()),
+        language: z.string().default('en'),
       })
     )
     .query(async ({ input }) => {
-      const { ids } = input;
+      const { ids, language } = input;
       
-      await new Promise(resolve => setTimeout(resolve, 300));
-
-      const selectedCategories = mockCategories.filter(category => 
-        ids.includes(category.id)
-      );
-
-      return {
-        categories: selectedCategories,
-      };
+      if (ids.length === 0) {
+        return {
+          categories: [],
+        };
+      }
+      try {
+        return {
+          categories: [],
+        };
+      } catch (error) {
+        console.error('Error in getSelected procedure:', error);
+        return {
+          categories: [],
+        };
+      }
     }),
 }); 

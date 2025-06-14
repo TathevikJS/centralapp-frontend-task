@@ -110,7 +110,7 @@ interface CategorySearchProps {
   language?: string;
 }
 
-export const CategorySearch: React.FC<CategorySearchProps> = () => {
+export const CategorySearch: React.FC<CategorySearchProps> = ({ language = 'en' }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<ApiCategory[]>([]);
   const [rotation, setRotation] = useState(0);
@@ -119,7 +119,9 @@ export const CategorySearch: React.FC<CategorySearchProps> = () => {
   const { data: searchData, isLoading } = useSearchCategories({
     query: searchTerm,
     page: 1,
-    limit: 10
+    limit: 10,
+    language,
+    level: 'L1'
   });
 
   const handleCategorySelect = (category: ApiCategory) => {
@@ -131,7 +133,6 @@ export const CategorySearch: React.FC<CategorySearchProps> = () => {
 
   const handleCategoryRemove = (category: ApiCategory) => {
     setSelectedCategories(prev => prev.filter(c => c.id !== category.id));
-    // Adjust current table index if needed
     const maxPlatesPerTable = 8;
     const totalTables = Math.ceil(selectedCategories.filter(c => c.id !== category.id).length / maxPlatesPerTable);
     if (currentTableIndex >= totalTables && totalTables > 0) {
@@ -142,7 +143,6 @@ export const CategorySearch: React.FC<CategorySearchProps> = () => {
   const plateSize = 130;
   const maxPlatesPerTable = 8;
 
-  // Split categories into groups of max 8 per table
   const groupedCategories = [];
   for (let i = 0; i < selectedCategories.length; i += maxPlatesPerTable) {
     groupedCategories.push(selectedCategories.slice(i, i + maxPlatesPerTable));
@@ -196,11 +196,6 @@ export const CategorySearch: React.FC<CategorySearchProps> = () => {
   return (
     <SearchOuter>
       <TableWrapper>
-        <TableLabel>
-          <FaUtensils />
-          Your Restaurant Table{totalTables > 1 ? 's' : ''}
-        </TableLabel>
-
         <SearchBar
           value={searchTerm}
           onChange={setSearchTerm}
