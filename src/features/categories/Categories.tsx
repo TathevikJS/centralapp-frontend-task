@@ -5,14 +5,12 @@ import { UICategory as ApiCategory } from '../../types/api';
 import { Toast } from '../../components';
 import { HeaderSection } from './core/HeaderSection';
 import { MainContentSection } from './core/MainContentSection';
-import { colors } from '@/styles/global';
 import { SearchSection } from './core/SearchSection';
 import { useI18n } from '../../providers/I18nProvider';
 
 
 const Container = styled.div`
   height: 100%;
-  background: ${colors.background};
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: hidden;
   display: flex;

@@ -12,8 +12,8 @@ const CardContainer = styled.div<{ $shadowColor: string }>`
   padding: 1.5rem;
   position: relative;
   box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15), 0 20px 40px -8px ${props => props.$shadowColor};
-  min-height: 180px;
   max-height: 220px;
+  min-height: 220px;
   display: flex;
   flex-direction: column;
   transform: translate3d(0, 0, 0);

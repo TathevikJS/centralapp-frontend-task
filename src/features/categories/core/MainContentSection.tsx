@@ -15,8 +15,7 @@ const fadeIn = keyframes`
 const MainContent = styled.div`
   padding: 2rem;
   height: 80%;
-  max-width: 95%;
-  margin: 0 auto;
+  background: ${colors.background};
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -58,11 +57,9 @@ const ItemsGrid = styled.div`
   animation: ${fadeIn} 0.5s ease-out;
   overflow-y: auto;
   overflow-x: hidden;
-  height: 500px;
   min-height: 500px;
-  max-height: 500px;
+  height: 500px;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding-bottom: 2rem;
   padding-right: 0.5rem;
