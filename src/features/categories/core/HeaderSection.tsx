@@ -5,6 +5,7 @@ import { Title, LanguageSwitcher } from '../../../components';
 
 const Header = styled.div`
   padding: 2rem 2rem 1rem;
+  height: 10%;
   width: 100%;
   align-items: center;
   text-align: center;
@@ -16,8 +17,8 @@ const Header = styled.div`
 
 const LanguageSwitcherContainer = styled.div`
   position: absolute;
-  top: 1rem;
-  right: 2rem;
+  top: 2rem;
+  right: 5rem;
 `;
 
 const Subtitle = styled.p`

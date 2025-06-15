@@ -5,11 +5,11 @@ import { Categories } from '@/features/categories/Categories';
 
 
 const PageContainer = styled.div`
-  display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
   background: none;
+  padding-left: 60px;
+  padding-right: 60px;
 `;
 
 export default function Home() {

@@ -11,7 +11,7 @@ import { useI18n } from '../../providers/I18nProvider';
 
 
 const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   background: ${colors.background};
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: hidden;

@@ -14,6 +14,7 @@ const fadeIn = keyframes`
 
 const MainContent = styled.div`
   padding: 2rem;
+  height: 80%;
   max-width: 95%;
   margin: 0 auto;
   flex: 1;
@@ -25,7 +26,7 @@ const MainContent = styled.div`
 const SectionHeader = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 2rem;
   flex-shrink: 0;
 `;

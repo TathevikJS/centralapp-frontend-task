@@ -8,6 +8,7 @@ import { useI18n } from '../../../providers/I18nProvider';
 
 const SearchSectionContainer = styled.div`
   padding: 2rem;
+  height: 10%;
   background: ${colors.white};
   border-bottom: 1px solid ${colors.border};
   flex-shrink: 0;
