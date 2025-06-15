@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react';
-import { CategorySearch } from '@/features/categorySearch/CategorySearch';
 import styled from 'styled-components';
+
+import { CategorySearch } from '@/features/categorySearch/CategorySearch';
 
 const PageContainer = styled.div`
   display: flex;

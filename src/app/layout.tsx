@@ -3,8 +3,8 @@ import { Geist } from "next/font/google";
 import { Providers } from '../providers/providers';
 
 export const metadata: Metadata = {
-  title: "Central App",
-  description: "Central App",
+  title: "Categories App",
+  description: "Categories App",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
