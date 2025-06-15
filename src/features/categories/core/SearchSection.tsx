@@ -55,7 +55,6 @@ export const SearchSection: React.FC<SearchSectionProps> = ({
     onCategorySelect,
     searchInputRef
 }) => {
-    const { t } = useI18n();
     return (
         <SearchSectionContainer>
             <SearchContainer>
@@ -75,7 +74,6 @@ export const SearchSection: React.FC<SearchSectionProps> = ({
                             results={searchData?.categories || []}
                             isLoading={isLoading}
                             onSelect={onCategorySelect}
-                            searchTerm={searchTerm}
                         />
                     )}
                 </SearchInputWrapper>

@@ -1,9 +1,8 @@
 'use client';
-
 import React from 'react';
 import styled from 'styled-components';
+import { Categories } from '@/features/categories/Categories';
 
-import { CategorySearch } from '@/features/categorySearch/CategorySearch';
 
 const PageContainer = styled.div`
   display: flex;
@@ -16,7 +15,7 @@ const PageContainer = styled.div`
 export default function Home() {
   return (
     <PageContainer>
-      <CategorySearch />
+      <Categories />
     </PageContainer>
   );
 }

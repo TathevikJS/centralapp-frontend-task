@@ -4,6 +4,10 @@ import React, { useState } from 'react';
 import { useServerInsertedHTML } from 'next/navigation';
 import { ServerStyleSheet, StyleSheetManager } from 'styled-components';
 
+/**
+ * Styled Components Registry - prevents FOUC by server-side rendering CSS
+ */
+
 export default function StyledComponentsRegistry({
   children,
 }: {

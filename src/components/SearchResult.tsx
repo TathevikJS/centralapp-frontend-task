@@ -110,15 +110,12 @@ interface SearchResultsProps {
   results: SearchResult[];
   isLoading: boolean;
   onSelect: (result: SearchResult) => void;
-  noResultsMessage?: string;
-  searchTerm: string;
 }
 
 export const SearchResult: React.FC<SearchResultsProps> = ({
   results,
   isLoading,
   onSelect,
-  searchTerm,
 }) => {
   const { t } = useI18n();
   return (
@@ -143,8 +140,6 @@ export const SearchResult: React.FC<SearchResultsProps> = ({
             </AddButton>
           </ResultItem>
         ))
-      ) : searchTerm.length >= 2 ? (
-        <LoadingMessage>{t('search.noCategoriesFound')}</LoadingMessage>
       ) : null}
     </ResultsContainer>
   );
