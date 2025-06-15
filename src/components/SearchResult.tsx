@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaTag, FaPlus } from 'react-icons/fa';
-import { NO_CATEGORIES_FOUND, SEARCHING } from '@/constants/texts';
+import { useI18n } from '@/providers/I18nProvider';
 
 const colors = {
   primary: '#6366f1',
@@ -120,10 +120,11 @@ export const SearchResult: React.FC<SearchResultsProps> = ({
   onSelect,
   searchTerm,
 }) => {
+  const { t } = useI18n();
   return (
     <ResultsContainer>
       {isLoading ? (
-        <LoadingMessage>{SEARCHING}</LoadingMessage>
+        <LoadingMessage>{t('search.searching')}</LoadingMessage>
       ) : results.length > 0 ? (
         results.map((result) => (
           <ResultItem
@@ -143,7 +144,7 @@ export const SearchResult: React.FC<SearchResultsProps> = ({
           </ResultItem>
         ))
       ) : searchTerm.length >= 2 ? (
-        <LoadingMessage>{NO_CATEGORIES_FOUND}</LoadingMessage>
+        <LoadingMessage>{t('search.noCategoriesFound')}</LoadingMessage>
       ) : null}
     </ResultsContainer>
   );

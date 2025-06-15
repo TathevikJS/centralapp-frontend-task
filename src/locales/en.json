@@ -1,0 +1,24 @@
+{
+  "categoryManager": {
+    "title": "Category Manager",
+    "subtitle": "Add and organize your categories",
+    "yourCategories": "Your Categories"
+  },
+  "search": {
+    "placeholder": "Search categories...",
+    "searching": "Searching...",
+    "noCategoriesFound": "No categories found"
+  },
+  "emptyState": {
+    "noCategoriesYet": "No categories yet",
+    "description": "Search and add categories using the search bar above to get started"
+  },
+  "toast": {
+    "addedSuccessfully": "added successfully!",
+    "alreadyAdded": "is already added",
+    "removed": "removed"
+  },
+  "loading": {
+    "loading": "Loading..."
+  }
+} 

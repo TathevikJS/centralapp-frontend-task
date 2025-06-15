@@ -4,3 +4,4 @@ export * from './SearchResult';
 export * from './ui/Badge';
 export * from './SectionHeader';
 export * from './ui/Title';
+export * from './LanguageSwitcher';

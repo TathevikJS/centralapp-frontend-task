@@ -16,7 +16,7 @@ const PageContainer = styled.div`
 export default function Home() {
   return (
     <PageContainer>
-      <CategorySearch language="en" />
+      <CategorySearch />
     </PageContainer>
   );
 }

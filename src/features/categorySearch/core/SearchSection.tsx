@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '@/styles/global';
 import { UICategory as ApiCategory } from '../../../types/api';
-import { SEARCH_PLACEHOLDER } from '../../../constants/texts';
 import { SearchResult } from '@/components/SearchResult';
 import { SearchInput } from '@/components';
+import { useI18n } from '../../../providers/I18nProvider';
 
 const SearchSectionContainer = styled.div`
   padding: 2rem;
@@ -55,6 +55,7 @@ export const SearchSection: React.FC<SearchSectionProps> = ({
     onCategorySelect,
     searchInputRef
 }) => {
+    const { t } = useI18n();
     return (
         <SearchSectionContainer>
             <SearchContainer>
@@ -63,7 +64,6 @@ export const SearchSection: React.FC<SearchSectionProps> = ({
                         ref={searchInputRef}
                         value={searchTerm}
                         onChange={(value) => onSearchChange(value)}
-                        placeholder={SEARCH_PLACEHOLDER}
                         onFocus={() => onShowResults(searchTerm.length >= 2)}
                         onBlur={() => {
                             setTimeout(() => onShowResults(false), 200);

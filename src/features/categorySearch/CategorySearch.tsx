@@ -3,12 +3,12 @@ import React, { useState, useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSearchCategories } from '../../hooks/useCategories';
 import { UICategory as ApiCategory } from '../../types/api';
-import { Toast } from '../../components';
+import { Toast, LanguageSwitcher } from '../../components';
 import { HeaderSection } from './core/HeaderSection';
 import { MainContentSection } from './core/MainContentSection';
 import { colors } from '@/styles/global';
-import { CATEGORY_MANAGER, ADD_AND_ORGANIZE, ADDED_SUCCESSFULLY, ALREADY_ADDED, REMOVED } from '../../constants/texts';
 import { SearchSection } from './core/SearchSection';
+import { useI18n } from '../../providers/I18nProvider';
 
 
 
@@ -21,11 +21,9 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-interface CategorySearchProps {
-  language: string;
-}
+export const CategorySearch: React.FC = () => {
+  const { locale } = useI18n();
 
-export const CategorySearch: React.FC<CategorySearchProps> = ({ language }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategories, setSelectedCategories] = useState<ApiCategory[]>([]);
   const [showResults, setShowResults] = useState(false);
@@ -36,12 +34,13 @@ export const CategorySearch: React.FC<CategorySearchProps> = ({ language }) => {
   });
 
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const { t } = useI18n();
 
   const { data: searchData, isLoading } = useSearchCategories({
     query: searchTerm,
     page: 1,
     limit: 10,
-    language,
+    language: locale,
     level: 'L1'
   });
 
@@ -53,18 +52,18 @@ export const CategorySearch: React.FC<CategorySearchProps> = ({ language }) => {
   const handleCategorySelect = useCallback((category: ApiCategory) => {
     if (!selectedCategories.find(c => c.id === category.id)) {
       setSelectedCategories(prev => [...prev, category]);
-      showToast(`${category.name} ${ADDED_SUCCESSFULLY}`);
+      showToast(`${category.name} ${t('toast.addedSuccessfully')}`);
     } else {
-      showToast(`${category.name} ${ALREADY_ADDED}`, 'error');
+      showToast(`${category.name} ${t('toast.alreadyAdded')}`, 'error');
     }
     setSearchTerm('');
     setShowResults(false);
-  }, [selectedCategories, showToast]);
+  }, [selectedCategories, showToast, t]);
 
   const handleCategoryRemove = useCallback((category: ApiCategory) => {
     setSelectedCategories(prev => prev.filter(c => c.id !== category.id));
-    showToast(`${category.name} ${REMOVED}`);
-  }, [showToast]);
+    showToast(`${category.name} ${t('toast.removed')}`);
+  }, [showToast, t]);
 
   const handleSearchChange = useCallback((value: string) => {
     setSearchTerm(value);
@@ -74,8 +73,8 @@ export const CategorySearch: React.FC<CategorySearchProps> = ({ language }) => {
   return (
     <Container>
       <HeaderSection
-        title={CATEGORY_MANAGER}
-        subtitle={ADD_AND_ORGANIZE}
+        title={t('categoryManager.title')}
+        subtitle={t('categoryManager.subtitle')}
       />
 
       <SearchSection

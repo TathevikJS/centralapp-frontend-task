@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 import { Input } from './ui';
 import { colors } from '@/styles/global';
-import { SEARCH_PLACEHOLDER } from '@/constants/texts';
+import { useI18n } from '@/providers/I18nProvider';
 
 const SearchInputContainer = styled.div`
   position: relative;
@@ -22,14 +22,14 @@ const SearchIcon = styled.div`
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
-  placeholder?: string;
   onFocus?: () => void;
   onBlur?: () => void;
   icon?: React.ReactNode;
 }
 
 export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
-  ({ value, onChange, placeholder = SEARCH_PLACEHOLDER, onFocus, onBlur, icon = <FaSearch /> }, ref) => {
+  ({ value, onChange, onFocus, onBlur, icon = <FaSearch /> }, ref) => {
+    const { t } = useI18n();
     return (
       <SearchInputContainer>
         <SearchIcon>{icon}</SearchIcon>
@@ -37,7 +37,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
           ref={ref}
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          placeholder={placeholder}
+          placeholder={t('search.placeholder')}
           onFocus={onFocus}
           onBlur={onBlur}
         />

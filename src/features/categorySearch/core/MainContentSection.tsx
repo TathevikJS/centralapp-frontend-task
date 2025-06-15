@@ -5,6 +5,7 @@ import { colors } from '@/styles/global';
 import { CategoryCard } from './CategoryCard';
 import { UICategory as ApiCategory } from '../../../types/api';
 import { EmptyState } from './EmptyState';
+import { useI18n } from '../../../providers/I18nProvider';
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -104,12 +105,14 @@ export const MainContentSection: React.FC<MainContentSectionProps> = ({
   selectedCategories,
   onCategoryRemove
 }) => {
+  const { t } = useI18n();
+  
   return (
     <MainContent>
       <SectionHeader>
         <SectionTitle>
           <FaHeart />
-          Your Categories
+          {t('categoryManager.yourCategories')}
           {selectedCategories.length > 0 && (
             <ItemCount>{selectedCategories.length}</ItemCount>
           )}
@@ -119,8 +122,8 @@ export const MainContentSection: React.FC<MainContentSectionProps> = ({
       {selectedCategories.length === 0 ? (
         <EmptyState
           icon={<FaHeart />}
-          title="No categories yet"
-          description="Search and add categories using the search bar above to get started"
+          title={t('emptyState.noCategoriesYet')}
+          description={t('emptyState.description')}
         />
       ) : (
         <ItemsGrid>

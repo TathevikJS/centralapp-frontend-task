@@ -1,6 +1,7 @@
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 import { Providers } from '../providers/providers';
+import StyledComponentsRegistry from '../lib/registry';
 
 export const metadata: Metadata = {
   title: "Categories App",
@@ -21,9 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${geist.variable}`}>
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <StyledComponentsRegistry>
+          <Providers>
+            {children}
+          </Providers>
+        </StyledComponentsRegistry>
       </body>
     </html>
   );

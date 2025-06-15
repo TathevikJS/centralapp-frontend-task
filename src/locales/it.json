@@ -1,0 +1,24 @@
+{
+  "categoryManager": {
+    "title": "Gestore Categorie",
+    "subtitle": "Aggiungi e organizza le tue categorie",
+    "yourCategories": "Le Tue Categorie"
+  },
+  "search": {
+    "placeholder": "Cerca categorie...",
+    "searching": "Ricerca in corso...",
+    "noCategoriesFound": "Nessuna categoria trovata"
+  },
+  "emptyState": {
+    "noCategoriesYet": "Nessuna categoria ancora",
+    "description": "Cerca e aggiungi categorie utilizzando la barra di ricerca sopra per iniziare"
+  },
+  "toast": {
+    "addedSuccessfully": "aggiunta con successo!",
+    "alreadyAdded": "è già stata aggiunta",
+    "removed": "rimossa"
+  },
+  "loading": {
+    "loading": "Caricamento..."
+  }
+} 

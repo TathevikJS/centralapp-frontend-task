@@ -11,9 +11,9 @@ export const colors = {
     white: '#ffffff', // White
     border: '#e5e7eb', // Light Gray
     shadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' // Shadow Color
-  };
-  
-  export const shadowColors = [
+};
+
+export const shadowColors = [
     'rgba(99, 102, 241, 0.15)', // Purple
     'rgba(139, 92, 246, 0.15)', // Violet
     'rgba(236, 72, 153, 0.15)', // Pink
@@ -24,5 +24,4 @@ export const colors = {
     'rgba(34, 197, 94, 0.15)',  // Emerald
     'rgba(168, 85, 247, 0.15)', // Purple
     'rgba(14, 165, 233, 0.15)'  // Sky
-  ];
-  
+];
