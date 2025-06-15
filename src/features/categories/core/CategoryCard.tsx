@@ -10,20 +10,19 @@ const CardContainer = styled.div<{ $shadowColor: string }>`
   border: 1px solid ${colors.border};
   border-radius: 16px;
   padding: 1.5rem;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.15), 0 20px 40px -8px ${props => props.$shadowColor};
   min-height: 180px;
   max-height: 220px;
   display: flex;
   flex-direction: column;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.05s linear;
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.2), 0 30px 60px -12px ${props => props.$shadowColor};
-    border: 1px solid ${colors.primary};
-    outline: 2px solid ${colors.primary};
-    outline-offset: -1px;
+    transform: translate3d(0, -3px, 0);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 35px 70px -15px ${props => props.$shadowColor};
+    border-color: ${colors.primary};
   }
 `;
 
